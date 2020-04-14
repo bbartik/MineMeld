@@ -5,7 +5,7 @@ services:
   minemeld:
     image: paloaltonetworks/minemeld
     ports:
-      - "443:443"
+      - "4433:443"
     volumes:
       - ./minemeld/local:/opt/minemeld/local
       - ./minemeld/prototypes:/opt/minemeld/local/prototypes
