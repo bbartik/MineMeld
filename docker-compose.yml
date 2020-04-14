@@ -4,6 +4,7 @@ version: '3'
 services:
   minemeld:
     image: paloaltonetworks/minemeld
+    restart: on-failure
     ports:
       - "4433:443"
     volumes:
