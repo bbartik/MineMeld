@@ -1,0 +1,162 @@
+nodes:
+  Hail-EmergingThreats-TAXII-Miner:
+    inputs: []
+    output: true
+    prototype: hailataxii.guest_EmergingThreats_rules
+  AWS-Cloudfront-IP-Miner:
+    inputs: []
+    output: true
+    prototype: aws.CLOUDFRONT
+  Dshield-IP-Miner:
+    output: true
+    prototype: dshield.block
+  Azure-Cloud-IP-Miner:
+    inputs: []
+    output: true
+    prototype: azure.cloudIPs
+  AWS-EC2-IP-Miner:
+    inputs: []
+    output: true
+    prototype: aws.EC2
+  URL-Aggregator:
+    inputs:
+      - AutoFocus-Miner
+      - Hail-EmergingThreats-TAXII-Miner
+      - IT-Cert-URL-Miner
+      - URL-Phishing-Feed
+      - Openphish-URL-Miner
+    output: true
+    prototype: stdlib.aggregatorURL
+  IT-Cert-URL-Miner:
+    inputs: []
+    output: true
+    prototype: itcertpa.URLS
+  Spamhaus-DROP-Miner:
+    output: true
+    prototype: spamhaus.DROP
+  Spamhaus-EDROP-Miner:
+    output: true
+    prototype: spamhaus.EDROP
+  URL-Feed:
+    inputs:
+      - URL-Aggregator
+    output: false
+    prototype: stdlib.feedGreenWithValue
+  TOR-IP-Aggregator:
+    inputs:
+      - TOR-Exit-Nodes-Miner
+    output: true
+    prototype: stdlib.aggregatorIPv4Generic
+  Domain-Feed:
+    inputs:
+      - Domain-Aggregator
+    output: false
+    prototype: stdlib.feedGreenWithValue
+  AWS-IP-Aggregator:
+    inputs:
+      - AWS-EC2-IP-Miner
+      - AWS-Amazon-IP-Miner
+      - AWS-S3-IP-Miner
+      - AWS-Cloudfront-IP-Miner
+      - AWS-Route53-IP-Miner
+      - AWS-Route53-Health-Check-IP-Miner
+    output: true
+    prototype: stdlib.aggregatorIPv4Generic
+  IPv4-Feed:
+    inputs:
+      - IPv4-Aggregator
+    output: false
+    prototype: stdlib.feedGreenWithValue
+  AWS-S3-IP-Miner:
+    inputs: []
+    output: true
+    prototype: aws.S3
+  TOR-Exit-Nodes-Miner:
+    inputs: []
+    output: true
+    prototype: tor.exit_addresses
+  SSL-Abuse-Blacklist-Miner:
+    inputs: []
+    output: true
+    prototype: sslabusech.ipblacklist
+  Malc0de-Domain-Miner:
+    inputs: []
+    output: true
+    prototype: malc0de.DOMAINS
+  Bambenek-C2-Domain-Miner:
+    inputs: []
+    output: true
+    prototype: bambenekconsulting.c2_dommasterlist
+  AWS-IP-Feed:
+    inputs:
+      - AWS-IP-Aggregator
+    output: false
+    prototype: stdlib.feedGreenWithValue
+  TOR-Exit-Node-Feed:
+    inputs:
+      - TOR-IP-Aggregator
+    output: false
+    prototype: stdlib.feedGreenWithValue
+  Domain-Aggregator:
+    inputs:
+      - Hail-EmergingThreats-TAXII-Miner
+      - AutoFocus-Miner
+      - Bambenek-C2-Domain-Miner
+      - Malc0de-Domain-Miner
+    output: true
+    prototype: stdlib.aggregatorDomain
+  CERT-Bad-IPs-IP-Miner:
+    inputs: []
+    output: true
+    prototype: badips.blocklist_any_3_2weeks
+  AWS-Amazon-IP-Miner:
+    inputs: []
+    output: true
+    prototype: aws.AMAZON
+  Openphish-URL-Miner:
+    inputs: []
+    output: true
+    prototype: openphish.feed
+  IPv4-Aggregator:
+    inputs:
+      - Spamhaus-EDROP-Miner
+      - Spamhaus-DROP-Miner
+      - WhiteListIPv4-Miner
+      - AutoFocus-Miner
+      - Hail-EmergingThreats-TAXII-Miner
+      - Dshield-IP-Miner
+      - SSL-Abuse-Blacklist-Miner
+      - CERT-Bad-IPs-IP-Miner
+    output: true
+    prototype: stdlib.aggregatorIPv4Generic
+  Azure-IP-Aggregator:
+    inputs:
+      - Azure-Cloud-IP-Miner
+    output: true
+    prototype: stdlib.aggregatorIPv4Generic
+  AutoFocus-Miner:
+    inputs: []
+    output: true
+    prototype: autofocus.exportList
+  AWS-Route53-IP-Miner:
+    inputs: []
+    output: true
+    prototype: aws.ROUTE53
+  Azure-IP-Feed:
+    inputs:
+      - Azure-IP-Aggregator
+    output: false
+    prototype: stdlib.feedGreenWithValue
+  URL-Phishing-Feed:
+    inputs: []
+    output: true
+    prototype: openphish.feed
+  AWS-Route53-Health-Check-IP-Miner:
+    inputs: []
+    output: true
+    prototype: aws.ROUTE53_HEALTHCHECKS
+  WhiteListIPv4-Miner:
+    inputs: []
+    output: true
+    prototype: stdlib.listIPv4Generic
+

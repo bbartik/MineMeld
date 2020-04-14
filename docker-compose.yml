@@ -1,0 +1,17 @@
+# Builds a persistant volume for MineMeld
+version: '3'
+
+services:
+  minemeld:
+    image: paloaltonetworks/minemeld
+    ports:
+      - "10.1.0.35:443:443"
+    volumes:
+      - ./minemeld/local:/opt/minemeld/local
+      - ./minemeld/prototypes:/opt/minemeld/local/prototypes
+      - ./minemeld/certs/server.crt:/etc/nginx/minemeld.cer:ro  
+      - ./minemeld/certs/server.key:/etc/nginx/minemeld.pem:ro 
+    container_name: minemeld
+
+volumes:
+  minemeld:
