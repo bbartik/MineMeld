@@ -23,7 +23,7 @@ nodes:
       - AutoFocus-Miner
       - Hail-EmergingThreats-TAXII-Miner
       - IT-Cert-URL-Miner
-      - URL-Phishing-Feed
+      - URL-Phishing-Miner
       - Openphish-URL-Miner
     output: true
     prototype: stdlib.aggregatorURL
@@ -147,7 +147,7 @@ nodes:
       - Azure-IP-Aggregator
     output: false
     prototype: stdlib.feedGreenWithValue
-  URL-Phishing-Feed:
+  URL-Phishing-Miner:
     inputs: []
     output: true
     prototype: openphish.feed
